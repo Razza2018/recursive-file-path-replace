@@ -6,7 +6,7 @@ substitution="$2";
 if [[ "$pattern" == *"|"* ]]
 then
 	echo "Warn: Converting | to \|.";
-	pattern=`echo "$pattern" | sed 's/|/\\\|/'`;
+	pattern=`echo "$pattern" | sed 's/|/\\\|/g'`;
 fi
 
 if [ -z "$pattern" ]
@@ -15,4 +15,4 @@ then
 	exit;
 fi
 
-find . -depth -iname "*$pattern*" -exec rename -d -v "s/$pattern/$substitution/" "{}" \;
+find . -depth -iname "*$pattern*" -exec rename -d -v "s/$pattern/$substitution/g" "{}" \;
